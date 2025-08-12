@@ -1,0 +1,44 @@
+// fib_both.qk — recursive vs iterative Fibonacci
+
+func fib_rec(n) {
+  if (n <= 1) {
+    return n;
+  } else {
+    return fib_rec(n - 1) + fib_rec(n - 2);
+  }
+}
+
+func fib_iter(n) {
+  if (n <= 1) { return n; }
+  let a = 0;
+  let b = 1;
+  let i = 2;
+  while (i <= n) {
+    let t = a + b;
+    a = b;
+    b = t;
+    i = i + 1;
+  }
+  return b;
+}
+
+func main() {
+  // Single-value demo (both should print 55)
+  print fib_rec(10);
+  print fib_iter(10);
+
+  // Compare first 20 numbers.
+  // For each k, we print: k, fib_rec(k), fib_iter(k), (difference)
+  let k = 0;
+  while (k < 20) {
+    let r = fib_rec(k);
+    let it = fib_iter(k);
+    print k;
+    print r;
+    print it;
+    print r - it;   // should be 0 if they match
+    k = k + 1;
+  }
+
+  return 0;
+}
